@@ -1001,8 +1001,27 @@ public int Pid;
 
     }
 
-    @Override
-    public boolean deleteProduct() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     @Override
+    public boolean deleteProduct()
+    {
+          // ResultSet rs=null;
+      //  ArrayList<Product> allProducts = new ArrayList<>();
+        try
+        {
+        Class.forName("com.mysql.jdbc.Driver");
+         Connection cn=DriverManager.getConnection("jdbc:mysql://localhost/shopping","root","");
+        Statement stmt=cn.createStatement();
+      String sql=("delete from product where ID='"+Pid+"'");
+      stmt.executeUpdate(sql);
+       return true;
+        }
+        catch(Exception e)
+        {
+              e.printStackTrace();
+        }
+        return false;
+               
+            //return preparedStatement.executeUpdate() > 0;
+ }
+
 }
